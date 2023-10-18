@@ -4,12 +4,11 @@ import { Checkbox } from 'antd';
 
 
 export default function Page() {
+  
   const [todos, setTodos] = useState(() => {
     const storedTodos = localStorage.getItem("todos");
     return storedTodos ? JSON.parse(storedTodos) : [{ text: "", completed: false }];
   });
-
-  
 
   useEffect(() => {
     localStorage.setItem("todos", JSON.stringify(todos));;
@@ -57,7 +56,7 @@ export default function Page() {
         <ul className="flex flex-col justify-center item-between">
           {Array.isArray(todos) &&
             todos.map((todo, index) => (
-              <li key={index}className={`flex flex-row h-10 justify-between items-center text-red-800 text-center m-2 px-3 bottom-3 border-2 border-black rounded-md bg-white ${
+              <li key={index} className={`flex flex-row h-10 justify-between items-center text-red-800 text-center m-2 px-3 bottom-3 border-2 border-black rounded-md bg-white ${
                 todo.completed ? 'bg-green-200' : ''
               }`}>
                  <Checkbox
