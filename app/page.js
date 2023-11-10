@@ -8,16 +8,24 @@ import {
 } from "@ant-design/icons";
 
 export default function Page() {
+
+
+
   const [todos, setTodos] = useState(() => {
-    const storedTodos = localStorage.getItem("todos");
-    return storedTodos
-      ? JSON.parse(storedTodos)
-      : [{ text: "", completed: false }];
+    if (typeof window !== 'undefined') {
+      const storedTodos = localStorage.getItem("todos");
+      return storedTodos ? JSON.parse(storedTodos) : [{ text: "", completed: false }];
+    }
+    return [{ text: "", completed: false }];
   });
 
-  useEffect(() => {
-    localStorage.setItem("todos", JSON.stringify(todos));
-  }, [todos]);
+
+
+useEffect(() => {
+  if (typeof window !== 'undefined') {
+    localStorage.setItem('todos', JSON.stringify(todos));
+  }
+}, [todos]);
 
   const handleInputChange = (event, index) => {
     const newTodos = [...todos];
